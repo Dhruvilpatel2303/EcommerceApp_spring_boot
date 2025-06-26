@@ -1,0 +1,29 @@
+package com.example.demo.configuration;
+
+import com.example.demo.gateway.api.FakeStoreCategoryApi;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+@Configuration
+public class Retrofitconfig{
+
+
+    @Bean
+    public Retrofit retrofit(){
+        return new Retrofit.Builder().baseUrl("https://fakestoreapi.in/api/").addConverterFactory(GsonConverterFactory.create()).build();
+    }
+
+    @Bean
+    public FakeStoreCategoryApi fakeStoreCategoryApi(Retrofit retrofit){
+        System.out.println("data fetched by postman");
+        return retrofit.create(FakeStoreCategoryApi.class);
+
+    }
+
+
+
+
+
+}
