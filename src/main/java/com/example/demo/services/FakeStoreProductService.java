@@ -1,7 +1,7 @@
 package com.example.demo.services;
 
+import com.example.demo.dto.FakeStoreSpecificProductDTO;
 import com.example.demo.dto.ProductsDTO;
-import com.example.demo.gateway.FakeStoreProductsGateway;
 import com.example.demo.gateway.IProductGateway;
 import org.springframework.stereotype.Service;
 
@@ -21,5 +21,10 @@ public class FakeStoreProductService implements IProductsService{
     @Override
     public List<ProductsDTO> getAllProducts() throws IOException {
         return productGateway.getAllProducts();
+    }
+
+    @Override
+    public ProductsDTO getSpecificProduct(Integer id) throws IOException {
+        return productGateway.getSpecificProduct(id);
     }
 }

@@ -1,9 +1,11 @@
 package com.example.demo.controllers;
 
+import com.example.demo.dto.FakeStoreSpecificProductDTO;
 import com.example.demo.dto.ProductsDTO;
 import com.example.demo.services.ICategoryService;
 import com.example.demo.services.IProductsService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,7 +25,15 @@ public class ProductsController {
 
     @GetMapping
     public List<ProductsDTO> getAllProducts() throws IOException {
+        System.out.println("Data fetched for all products");
         return productsService.getAllProducts();
+    }
+
+    @GetMapping("/{id}")
+    public ProductsDTO getSpecificProduct(@PathVariable int id) throws IOException {
+        System.out.println("Data fetched for product id -> " +id);
+
+        return productsService.getSpecificProduct(id);
     }
 
 
