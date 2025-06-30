@@ -36,5 +36,4 @@ public class ProductsController {
         return productsService.getSpecificProduct(id);
     }
 
-
 }

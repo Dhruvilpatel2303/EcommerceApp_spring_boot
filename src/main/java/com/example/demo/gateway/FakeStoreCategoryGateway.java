@@ -3,14 +3,10 @@ package com.example.demo.gateway;
 import com.example.demo.dto.CategoryDTO;
 import com.example.demo.dto.FakeStoreCategoryDTO;
 import com.example.demo.gateway.api.FakeStoreCategoryApi;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Stream;
-
-import static java.util.stream.Collectors.toList;
 
 @Component
 public class FakeStoreCategoryGateway  implements  ICategoryGateway{
@@ -35,7 +31,7 @@ public class FakeStoreCategoryGateway  implements  ICategoryGateway{
         return response.getCategories().stream().map(
                 category -> CategoryDTO.builder()
                         .name(category)
-                        .status(category)
+
 
                         .build()).toList()
         ;
