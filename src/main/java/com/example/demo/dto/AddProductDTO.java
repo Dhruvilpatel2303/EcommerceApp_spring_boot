@@ -1,5 +1,6 @@
 package com.example.demo.dto;
 
+
 import lombok.*;
 
 @Getter
@@ -7,16 +8,16 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ProductsDTO {
+public class AddProductDTO {
 
-    private Integer id;
 
     private String title;
-    private String image;
-    private Integer price;
-    private String description;
-    private Integer discount;
+    private String brand;
+    private String model;
+    private String color;
+    private String category;
 
+    private String discount;
 
 //
 //    title: "Apple Vision Pro",

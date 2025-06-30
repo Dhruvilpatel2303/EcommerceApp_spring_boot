@@ -1,11 +1,9 @@
 package com.example.demo.gateway;
 
-import com.example.demo.dto.FakeStoreProductDTO;
-import com.example.demo.dto.FakeStoreProductsDTO;
-import com.example.demo.dto.FakeStoreSpecificProductDTO;
-import com.example.demo.dto.ProductsDTO;
+import com.example.demo.dto.*;
 import com.example.demo.gateway.api.FakeStoreProductsApi;
 import org.springframework.stereotype.Component;
+import retrofit2.Response;
 
 import java.io.IOException;
 import java.util.List;
@@ -59,6 +57,37 @@ public class FakeStoreProductsGateway implements IProductGateway{
                 .discount(p.getDiscount())
                 .image(p.getImage())
                 .build();
+    }
+
+    @Override
+    public FakeStoreCreateProductResponseDTO createProduct(AddProductDTO addProductDTO) throws IOException {
+       FakeStoreCreateProductResponseDTO retrofitResponse = fakeStoreProductsApi.createProduct(addProductDTO).execute().body();
+
+//        if (!retrofitResponse.isSuccessful()) {
+//            throw new IOException("API error: " + retrofitResponse.code() + " - " + retrofitResponse.errorBody().string());
+//        }
+//
+        FakeStoreCreateProductResponseDTO body = retrofitResponse;
+//
+//        if (body == null) {
+//            throw new IOException("Received null body from product creation API");
+//        }
+
+        return body;
+    }
+
+    @Override
+    public FakeStoreUpdateProductResponseDTO updateProduct(int id,UpdateProductDTO updateProductDTO) throws IOException {
+        FakeStoreUpdateProductResponseDTO response=fakeStoreProductsApi.updateProduct(id,updateProductDTO).execute().body();
+
+
+        return response;
+    }
+
+    @Override
+    public FakeStoreDeleteProductResponseDTO deleteProduct(int id) throws IOException {
+        FakeStoreDeleteProductResponseDTO response=fakeStoreProductsApi.deleteProduct(id).execute().body();
+        return response;
     }
 
 
