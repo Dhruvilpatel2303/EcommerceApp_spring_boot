@@ -2,6 +2,7 @@ package com.example.demo.gateway;
 
 import com.example.demo.dto.*;
 import com.example.demo.gateway.api.FakeStoreProductsApi;
+import com.example.demo.mappers.ProductMappers;
 import org.springframework.stereotype.Component;
 import retrofit2.Response;
 
@@ -11,9 +12,11 @@ import java.util.List;
 @Component
 public class FakeStoreProductsGateway implements IProductGateway{
 
+
     private final FakeStoreProductsApi fakeStoreProductsApi;
 
-    public FakeStoreProductsGateway(FakeStoreProductsApi fakeStoreProductsApi) {
+    public FakeStoreProductsGateway( FakeStoreProductsApi fakeStoreProductsApi) {
+
         this.fakeStoreProductsApi = fakeStoreProductsApi;
     }
 
@@ -25,17 +28,7 @@ public class FakeStoreProductsGateway implements IProductGateway{
         if (response==null){
             throw new IOException("Failed to fetch the products");
         }
-
-        return response.getProducts().stream().map(
-                products -> ProductsDTO.builder()
-                        .id(products.getId())
-                        .title(products.getTitle())
-                        .price(products.getPrice())
-                        .image(products.getImage())
-                        .description(products.getDescription())
-                        .discount(products.getDiscount())
-                        .build())
-                .toList();
+        return ProductMappers.toListProductsDTO(response);
 
     }
 
@@ -47,31 +40,14 @@ public class FakeStoreProductsGateway implements IProductGateway{
             throw new IOException("Failed to fetch product details");
         }
 
-        FakeStoreProductDTO p = response.getProduct();
-
-        return ProductsDTO.builder()
-                .id(p.getId())
-                .title(p.getTitle())
-                .price(p.getPrice())
-                .description(p.getDescription())
-                .discount(p.getDiscount())
-                .image(p.getImage())
-                .build();
+        return ProductMappers.toProductDTO(response);
     }
 
     @Override
     public FakeStoreCreateProductResponseDTO createProduct(AddProductDTO addProductDTO) throws IOException {
        FakeStoreCreateProductResponseDTO retrofitResponse = fakeStoreProductsApi.createProduct(addProductDTO).execute().body();
 
-//        if (!retrofitResponse.isSuccessful()) {
-//            throw new IOException("API error: " + retrofitResponse.code() + " - " + retrofitResponse.errorBody().string());
-//        }
-//
         FakeStoreCreateProductResponseDTO body = retrofitResponse;
-//
-//        if (body == null) {
-//            throw new IOException("Received null body from product creation API");
-//        }
 
         return body;
     }
