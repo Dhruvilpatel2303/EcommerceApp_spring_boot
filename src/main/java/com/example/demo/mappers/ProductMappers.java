@@ -52,6 +52,7 @@ public class ProductMappers {
                 .description(product.getDescription())
                 .popular(product.isPopular())
                 .model(product.getModel())
+                .categoryId(product.getCategory().getId())
                 .build();
 
     }
@@ -71,7 +72,8 @@ public class ProductMappers {
                 .image(dto.getImage())
                 .description(dto.getDescription())
                 .popular(dto.isPopular())
-                .category(category)  // ✅ now setting the actual Category object
+                .category(category)
+
                 .build();
     }
 }

@@ -5,7 +5,7 @@ import com.example.demo.dto.FakeStoreCategoryDTO;
 
 import java.util.List;
 
-public class CategoryMappers {
+public class FakeStoreCategoryMappers {
 
     public static List<CategoryDTO> toListCategories(FakeStoreCategoryDTO fakeStoreCategoryDTO) {
         return fakeStoreCategoryDTO.getCategories().stream().map(

@@ -3,7 +3,7 @@ package com.example.demo.gateway;
 import com.example.demo.dto.CategoryDTO;
 import com.example.demo.dto.FakeStoreCategoryDTO;
 import com.example.demo.gateway.api.FakeStoreCategoryApi;
-import com.example.demo.mappers.CategoryMappers;
+import com.example.demo.mappers.FakeStoreCategoryMappers;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -29,7 +29,7 @@ public class FakeStoreCategoryGateway  implements  ICategoryGateway{
         if (response == null){
             throw new IOException("Failed to get Response");
         }
-        return CategoryMappers.toListCategories(response);
+        return FakeStoreCategoryMappers.toListCategories(response);
 
     }
 }
