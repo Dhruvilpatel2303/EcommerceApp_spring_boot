@@ -42,4 +42,9 @@ public class FakeStoreProductService implements IProductsService{
         return productGateway.deleteProduct(id);
     }
 
+    @Override
+    public ProductsDTO createProductInDB(ProductsDTO productsDTO) {
+        return null;
+    }
+
 }

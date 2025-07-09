@@ -7,15 +7,19 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ProductsDTO {
-
-    private Integer id;
-
-    private String title;
+public class ProductsDTO{
     private String image;
-    private Integer price;
+    private String color;
+    private int price;
     private String description;
-    private Integer discount;
+    private int discount;
+    private String model;
+    private Long id;
+    private String title;
+    private String  category;
+    private String brand;
+    private boolean popular;
+}
 
 
 //
@@ -25,4 +29,4 @@ public class ProductsDTO {
 //    color: "Black",
 //    category: "appliances",
 //    discount: 1
-}
+

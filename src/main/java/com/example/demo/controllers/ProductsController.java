@@ -26,7 +26,7 @@ public class ProductsController {
     }
 
     @GetMapping("/{id}")
-    public ProductsDTO getSpecificProduct(@PathVariable int id) throws IOException {
+    public ProductsDTO getSpecificProduct(@PathVariable int id) throws Exception {
         System.out.println("Data fetched for product id -> " +id);
 
         return productsService.getSpecificProduct(id);
@@ -52,5 +52,10 @@ public class ProductsController {
         System.out.println("Started Delete Product");
         FakeStoreDeleteProductResponseDTO response=productsService.deleteProduct(id);
         return response;
+    }
+
+    @PostMapping("/db/create")
+    public ProductsDTO createProductInDB(@RequestBody ProductsDTO productsDTO){
+        return productsService.createProductInDB(productsDTO);
     }
 }
