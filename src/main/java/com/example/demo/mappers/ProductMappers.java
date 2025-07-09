@@ -4,7 +4,9 @@ import com.example.demo.dto.FakeStoreProductDTO;
 import com.example.demo.dto.FakeStoreProductsDTO;
 import com.example.demo.dto.FakeStoreSpecificProductDTO;
 import com.example.demo.dto.ProductsDTO;
+import com.example.demo.entities.Category;
 import com.example.demo.entities.Product;
+import com.example.demo.repository.CategoryRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -54,19 +56,22 @@ public class ProductMappers {
 
     }
 
-    public static Product toEntity(ProductsDTO dto){
+
+    public static Product toEntity(ProductsDTO dto, CategoryRepository categoryRepository) {
+        Category category = categoryRepository.findById(dto.getCategoryId())
+                .orElseThrow(() -> new RuntimeException("Category not found with ID: " + dto.getCategoryId()));
+
         return Product.builder()
-                .price(dto.getPrice())
                 .title(dto.getTitle())
-                .image(dto.getImage())
-                .discount(dto.getDiscount())
-                .color(dto.getColor())
                 .brand(dto.getBrand())
-                .category(dto.getCategory())
+                .model(dto.getModel())
+                .color(dto.getColor())
+                .price(dto.getPrice())
+                .discount(dto.getDiscount())
+                .image(dto.getImage())
                 .description(dto.getDescription())
                 .popular(dto.isPopular())
-                .model(dto.getModel())
+                .category(category)  // ✅ now setting the actual Category object
                 .build();
-
     }
 }

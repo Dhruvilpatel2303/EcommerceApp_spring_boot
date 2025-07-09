@@ -3,23 +3,26 @@ package com.example.demo.services;
 import com.example.demo.dto.*;
 import com.example.demo.entities.Product;
 import com.example.demo.mappers.ProductMappers;
+import com.example.demo.repository.CategoryRepository;
 import com.example.demo.repository.ProductRepository;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Primary
 public class ProductService implements IProductsService {
 
     private final ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
 
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(ProductRepository productRepository, CategoryRepository categoryRepository) {
         this.productRepository = productRepository;
+        this.categoryRepository = categoryRepository;
     }
-
     @Override
     public List<ProductsDTO> getAllProducts() throws IOException {
         return List.of();
@@ -50,7 +53,21 @@ public class ProductService implements IProductsService {
 
     @Override
     public ProductsDTO createProductInDB(ProductsDTO productsDTO) {
-      Product saved=  productRepository.save(ProductMappers.toEntity(productsDTO));
+      Product saved=  productRepository.save(ProductMappers.toEntity(productsDTO,categoryRepository));
         return ProductMappers.toDTO(saved);
     }
+
+    public List<ProductsDTO> getAllProductsDB(){
+        return productRepository.findAll()
+                .stream()
+                .map(ProductMappers::toDTO)
+                .collect(Collectors.toList())
+                ;
+    }
+
+    public void delete(Long id){
+        productRepository.deleteById(id);
+    }
+
+
 }

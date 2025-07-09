@@ -58,4 +58,9 @@ public class ProductsController {
     public ProductsDTO createProductInDB(@RequestBody ProductsDTO productsDTO){
         return productsService.createProductInDB(productsDTO);
     }
+
+//    @GetMapping
+//    public List<ProductsDTO> getProductsFromDB(){
+//
+//    }
 }
