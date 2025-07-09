@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service;
 @Builder
 public class CategoryDTO {
 
-    private String status;
-    private String name;
     private Integer id;
+    private String name;
+
 
 
 

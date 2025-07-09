@@ -1,9 +1,6 @@
 package com.example.demo.mappers;
 
-import com.example.demo.dto.FakeStoreProductDTO;
-import com.example.demo.dto.FakeStoreProductsDTO;
-import com.example.demo.dto.FakeStoreSpecificProductDTO;
-import com.example.demo.dto.ProductsDTO;
+import com.example.demo.dto.*;
 import com.example.demo.entities.Category;
 import com.example.demo.entities.Product;
 import com.example.demo.repository.CategoryRepository;
@@ -74,6 +71,22 @@ public class ProductMappers {
                 .popular(dto.isPopular())
                 .category(category)
 
+                .build();
+    }
+
+    public static ProductWIthCategoryDTO toProductWithCategoryDTO(Product product) {
+        return ProductWIthCategoryDTO.builder()
+                .id(product.getId())
+                .image(product.getImage())
+                .color(product.getColor())
+                .price(product.getPrice())
+                .description(product.getDescription())
+                .discount(product.getDiscount())
+                .model(product.getModel())
+                .title(product.getTitle())
+                .brand(product.getBrand())
+                .popular(product.isPopular())
+                 .category(CategoryMapper.toDTO(product.getCategory()))
                 .build();
     }
 }

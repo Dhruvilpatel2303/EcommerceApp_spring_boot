@@ -59,8 +59,19 @@ public class ProductsController {
         return productsService.createProductInDB(productsDTO);
     }
 
-//    @GetMapping
-//    public List<ProductsDTO> getProductsFromDB(){
-//
-//    }
+    @GetMapping("/db")
+    public List<ProductsDTO> getProductsFromDB() throws IOException {
+        return productsService.getAllProductsFromDB();
+
+    }
+
+    @GetMapping("/db/{id}")
+    public ProductsDTO getProductByIdFromDB(@PathVariable("id") Integer Id) throws Exception {
+        return productsService.getSpecificProductByIDFromDB(Id.longValue());
+    }
+
+    @GetMapping("/db/product/categories/{id}")
+    public ProductWIthCategoryDTO productWIthCategoryDTO(@PathVariable("id") Long id) throws Exception {
+        return productsService.productWithCategory(id);
+    }
 }

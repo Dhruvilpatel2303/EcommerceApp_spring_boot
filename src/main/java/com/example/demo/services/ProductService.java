@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -55,6 +56,27 @@ public class ProductService implements IProductsService {
     public ProductsDTO createProductInDB(ProductsDTO productsDTO) {
       Product saved=  productRepository.save(ProductMappers.toEntity(productsDTO,categoryRepository));
         return ProductMappers.toDTO(saved);
+    }
+
+    @Override
+    public List<ProductsDTO> getAllProductsFromDB() {
+        return productRepository.findAll().stream().map(ProductMappers::toDTO).toList();
+    }
+
+    @Override
+    public ProductsDTO  getSpecificProductByIDFromDB(Long ID) throws Exception {
+        return productRepository.findById(ID).map(
+                ProductMappers::toDTO
+        ).orElseThrow(
+                () -> new Exception("Not found")
+        );
+    }
+
+    @Override
+    public ProductWIthCategoryDTO productWithCategory(Long id) throws Exception {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new Exception("Product not found"));
+        return ProductMappers.toProductWithCategoryDTO(product);
     }
 
     public List<ProductsDTO> getAllProductsDB(){

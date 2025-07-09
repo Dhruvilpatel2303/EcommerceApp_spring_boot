@@ -1,7 +1,9 @@
 package com.example.demo.services;
 
 
+import com.example.demo.dto.AllProductsOfCategoryDTO;
 import com.example.demo.dto.CategoryDTO;
+import com.example.demo.dto.ProductsDTO;
 import com.example.demo.gateway.ICategoryGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -28,6 +30,21 @@ public class FakeStoreCategoryService implements  ICategoryService {
 
     @Override
     public CategoryDTO createCategory(CategoryDTO categoryDTO) {
+        return null;
+    }
+
+    @Override
+    public CategoryDTO getSpecificCategoryByIdFromDB(Long id) {
+        return null;
+    }
+
+    @Override
+    public List<ProductsDTO> getAllProductsByCategory(Long id) {
+        return List.of();
+    }
+
+    @Override
+    public AllProductsOfCategoryDTO allProductsOfCategory(Long id) {
         return null;
     }
 

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FakeStoreProductService implements IProductsService{
@@ -44,6 +45,21 @@ public class FakeStoreProductService implements IProductsService{
 
     @Override
     public ProductsDTO createProductInDB(ProductsDTO productsDTO) {
+        return null;
+    }
+
+    @Override
+    public List<ProductsDTO> getAllProductsFromDB() {
+        return null;
+    }
+
+    @Override
+    public ProductsDTO getSpecificProductByIDFromDB(Long ID) {
+        return null;
+    }
+
+    @Override
+    public ProductWIthCategoryDTO productWithCategory(Long id) {
         return null;
     }
 
