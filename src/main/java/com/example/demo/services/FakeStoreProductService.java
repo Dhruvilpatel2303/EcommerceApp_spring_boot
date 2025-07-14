@@ -63,4 +63,14 @@ public class FakeStoreProductService implements IProductsService{
         return null;
     }
 
+    @Override
+    public List<ProductsDTO> getExpensiveProducts(Long minPrice) {
+        return List.of();
+    }
+
+    @Override
+    public List<ProductsDTO> getProductByProductName(String productname) {
+        return List.of();
+    }
+
 }

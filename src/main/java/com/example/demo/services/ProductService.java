@@ -79,6 +79,20 @@ public class ProductService implements IProductsService {
         return ProductMappers.toProductWithCategoryDTO(product);
     }
 
+    @Override
+    public List<ProductsDTO> getExpensiveProducts(Long minPrice) {
+        return productRepository.findExpensiveProducts(minPrice).stream().map(
+                ProductMappers::toDTO
+        ).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ProductsDTO> getProductByProductName(String productname) {
+        return productRepository.searchFullText(productname).stream().map(
+                ProductMappers::toDTO
+        ).collect(Collectors.toList());
+    }
+
     public List<ProductsDTO> getAllProductsDB(){
         return productRepository.findAll()
                 .stream()
@@ -90,6 +104,9 @@ public class ProductService implements IProductsService {
     public void delete(Long id){
         productRepository.deleteById(id);
     }
+
+
+
 
 
 }

@@ -1,12 +1,14 @@
 package com.example.demo.controllers;
 
 import com.example.demo.dto.*;
+import com.example.demo.entities.Product;
 import com.example.demo.services.ICategoryService;
 import com.example.demo.services.IProductsService;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Stack;
 
 @RestController
 @RequestMapping("products")
@@ -73,5 +75,15 @@ public class ProductsController {
     @GetMapping("/db/product/categories/{id}")
     public ProductWIthCategoryDTO productWIthCategoryDTO(@PathVariable("id") Long id) throws Exception {
         return productsService.productWithCategory(id);
+    }
+
+    @GetMapping("/db/product/{minprice}")
+    public List<ProductsDTO> getExpensiveProducts(@PathVariable("minprice") Long minPrice){
+        return productsService.getExpensiveProducts(minPrice);
+    }
+
+    @GetMapping("/db/product/productname/{productname}")
+    public List<ProductsDTO> getProductByProductName(@PathVariable("productname") String productname){
+        return productsService.getProductByProductName(productname);
     }
 }

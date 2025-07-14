@@ -20,5 +20,6 @@ public interface IProductsService {
     List<ProductsDTO> getAllProductsFromDB();
     ProductsDTO getSpecificProductByIDFromDB(Long ID) throws Exception;
     ProductWIthCategoryDTO productWithCategory(Long id) throws Exception;
-
+     List<ProductsDTO> getExpensiveProducts(Long minPrice);
+     List<ProductsDTO> getProductByProductName(String productname);
 }
