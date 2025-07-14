@@ -2,6 +2,7 @@ package com.example.demo.services;
 
 import com.example.demo.dto.*;
 import com.example.demo.entities.Product;
+import com.example.demo.exceptions.ProductNotFoundException;
 import com.example.demo.mappers.ProductMappers;
 import com.example.demo.repository.CategoryRepository;
 import com.example.demo.repository.ProductRepository;
@@ -64,11 +65,11 @@ public class ProductService implements IProductsService {
     }
 
     @Override
-    public ProductsDTO  getSpecificProductByIDFromDB(Long ID) throws Exception {
+    public ProductsDTO  getSpecificProductByIDFromDB(Long ID) {
         return productRepository.findById(ID).map(
                 ProductMappers::toDTO
         ).orElseThrow(
-                () -> new Exception("Not found")
+                () -> new ProductNotFoundException("Product Not Found with ID " + ID )
         );
     }
 

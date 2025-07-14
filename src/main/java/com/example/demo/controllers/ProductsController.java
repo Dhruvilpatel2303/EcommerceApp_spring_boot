@@ -2,8 +2,11 @@ package com.example.demo.controllers;
 
 import com.example.demo.dto.*;
 import com.example.demo.entities.Product;
+import com.example.demo.exceptions.ProductNotFoundException;
 import com.example.demo.services.ICategoryService;
 import com.example.demo.services.IProductsService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -57,13 +60,24 @@ public class ProductsController {
     }
 
     @PostMapping("/db/create")
-    public ProductsDTO createProductInDB(@RequestBody ProductsDTO productsDTO){
-        return productsService.createProductInDB(productsDTO);
+    public ResponseEntity<?> createProductInDB(@RequestBody ProductsDTO productsDTO){
+        try {
+            ProductsDTO product=productsService.createProductInDB(productsDTO);
+            return ResponseEntity.ok(product);
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Product Not Created");
+
+        }
     }
 
     @GetMapping("/db")
-    public List<ProductsDTO> getProductsFromDB() throws IOException {
-        return productsService.getAllProductsFromDB();
+    public ResponseEntity<?> getProductsFromDB()  {
+        try {
+            List<ProductsDTO> productsDTOS=productsService.getAllProducts();
+            return ResponseEntity.ok(productsDTOS);
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Not Able to Fetch Product");
+        }
 
     }
 
@@ -86,4 +100,11 @@ public class ProductsController {
     public List<ProductsDTO> getProductByProductName(@PathVariable("productname") String productname){
         return productsService.getProductByProductName(productname);
     }
+
+    @ExceptionHandler(ProductNotFoundException.class)
+    public ResponseEntity<String> handleProductNotFound(ProductNotFoundException exception){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
+
+    }
+
 }
