@@ -107,4 +107,8 @@ public class ProductsController {
 
     }
 
+//    @ExceptionHandler(ProductDeleteException.class)
+//        @ExceptionHandler(ProductCreateException.class)
+//we can do multiple exception handler and also they identitfy it self by given and used class name and according to it the methos is called when exception happned
+
 }
