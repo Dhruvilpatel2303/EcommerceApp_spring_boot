@@ -39,6 +39,8 @@ dependencies {
 	implementation 'com.squareup.retrofit2:retrofit:2.9.0'
 
 	runtimeOnly 'com.mysql:mysql-connector-j'
+	implementation 'org.flywaydb:flyway-core'
+	implementation 'org.flywaydb:flyway-mysql:11.9.1'
 }
 
 tasks.named('test') {
