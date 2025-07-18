@@ -101,11 +101,11 @@ public class ProductsController {
         return productsService.getProductByProductName(productname);
     }
 
-//    @ExceptionHandler(ProductNotFoundException.class)
-//    public ResponseEntity<String> handleProductNotFound(ProductNotFoundException exception){
-//        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
-//
-//    }
+    @ExceptionHandler(ProductNotFoundException.class)
+    public ResponseEntity<String> handleProductNotFound(ProductNotFoundException exception){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
+
+    }
 
 //    @ExceptionHandler(ProductDeleteException.class)
 //        @ExceptionHandler(ProductCreateException.class)
